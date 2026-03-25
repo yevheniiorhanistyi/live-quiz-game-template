@@ -64,6 +64,13 @@ function handleMessage(client: Client, msg: WSMessage): void {
   }
 }
 
+export const setPlayerToClient = (
+  playerId: string | number,
+  client: Client,
+) => {
+  playerToClient.set(playerId, client);
+};
+
 export const getClientByPlayerId = (id: string | number) =>
   playerToClient.get(id);
 

@@ -1,4 +1,5 @@
 import { Client, RegData } from "../types";
+import { getClientByPlayerId, setPlayerToClient } from "../ws";
 import { send } from "../services/socketService";
 import { createPlayer, findPlayerByName, getPlayerPassword } from "../storage";
 
@@ -24,12 +25,28 @@ export const handleReg = (client: Client, data: unknown): void => {
         name,
         index: "",
         error: true,
-        errorText: "Invalid credentials",
+        errorText: "Authentication failed",
+      });
+      return;
+    }
+
+    const activeClient = getClientByPlayerId(existing.index);
+
+    console.log("Active client:", activeClient);
+
+    if (activeClient && activeClient.ws !== client.ws) {
+      send(client.ws, "reg", {
+        name,
+        index: "",
+        error: true,
+        errorText: "This account is already active in another session",
       });
       return;
     }
 
     client.playerId = existing.index;
+    setPlayerToClient(existing.index, client);
+
     send(client.ws, "reg", {
       name: existing.name,
       index: existing.index,
@@ -41,6 +58,7 @@ export const handleReg = (client: Client, data: unknown): void => {
 
   const player = createPlayer(name, password);
   client.playerId = player.index;
+  setPlayerToClient(player.index, client);
 
   send(client.ws, "reg", {
     name: player.name,

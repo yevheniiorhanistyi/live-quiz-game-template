@@ -32,8 +32,6 @@ export const handleReg = (client: Client, data: unknown): void => {
 
     const activeClient = getClientByPlayerId(existing.index);
 
-    console.log("Active client:", activeClient);
-
     if (activeClient && activeClient.ws !== client.ws) {
       send(client.ws, "reg", {
         name,

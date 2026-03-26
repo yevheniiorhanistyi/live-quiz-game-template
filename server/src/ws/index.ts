@@ -1,14 +1,14 @@
 import { WebSocket, WebSocketServer } from "ws";
-import { Client, WSMessage } from "../types";
-import { handleReg } from "../handlers/auth";
-import { send } from "../services/socketService";
+import { Client, WSMessage } from "../types/index.js";
+import { handleReg } from "../handlers/auth.js";
+import { send } from "../services/socketService.js";
 import {
   handleCreateGame,
   handleJoinGame,
   handleStartGame,
   handleLeaveGame,
   handleAnswer,
-} from "../handlers/game";
+} from "../handlers/game.js";
 
 const clients: Map<WebSocket, Client> = new Map();
 const playerToClient: Map<string | number, Client> = new Map();

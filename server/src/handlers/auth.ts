@@ -1,7 +1,11 @@
-import { Client, RegData } from "../types";
-import { getClientByPlayerId, setPlayerToClient } from "../ws";
-import { send } from "../services/socketService";
-import { createPlayer, findPlayerByName, getPlayerPassword } from "../storage";
+import { Client, RegData } from "../types/index.js";
+import { getClientByPlayerId, setPlayerToClient } from "../ws/index.js";
+import { send } from "../services/socketService.js";
+import {
+  createPlayer,
+  findPlayerByName,
+  getPlayerPassword,
+} from "../storage/index.js";
 
 export const handleReg = (client: Client, data: unknown): void => {
   if (

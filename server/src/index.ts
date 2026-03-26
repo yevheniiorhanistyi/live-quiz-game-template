@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws";
-import { setupWebSocket } from "./ws";
+import { setupWebSocket } from "./ws/index.js";
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 

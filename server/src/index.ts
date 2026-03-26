@@ -7,3 +7,7 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const wss = new WebSocketServer({ port: PORT });
 
 setupWebSocket(wss);
+
+const address = `ws://localhost:${PORT}`;
+
+console.log(`Server started on ${address}`);

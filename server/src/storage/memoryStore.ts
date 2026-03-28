@@ -1,5 +1,5 @@
 import { Player, Game } from "../types/index.js";
-import { generateCode } from "../utils/index.js";
+import { generateCode } from "../utils/gameUtils.js";
 
 const players: Map<string | number, Player> = new Map();
 const playerCredentials: Map<string, string> = new Map();

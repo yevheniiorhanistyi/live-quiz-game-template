@@ -1,8 +1,14 @@
-import type { WebSocket } from 'ws';
+import type { WebSocket } from "ws";
+
+export interface Client {
+  ws: WebSocket;
+  playerId: number | string | null;
+  gameId?: string;
+}
 
 export interface Player {
   name: string;
-  index: string;
+  index: number | string;
   score: number;
   ws?: WebSocket;
   hasAnswered?: boolean;
@@ -20,14 +26,11 @@ export interface Question {
 export interface Game {
   id: string;
   code: string;
-  hostId: string;
+  hostId: number | string;
   questions: Question[];
   players: Player[];
   currentQuestion: number;
-  status: 'waiting' | 'in_progress' | 'finished';
-  questionStartTime?: number;
-  questionTimer?: NodeJS.Timeout;
-  playerAnswers: Map<string, { answerIndex: number; timestamp: number }>;
+  status: "waiting" | "in_progress" | "finished";
 }
 
 export interface User {
@@ -39,7 +42,7 @@ export interface User {
 
 export interface WSMessage {
   type: string;
-  data: any;
+  data: unknown;
   id: number;
 }
 
